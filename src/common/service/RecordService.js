@@ -16,9 +16,16 @@ export default {
             console.log("取消收藏,数量:", count)
         })
     },
-    getAll: (callback) => {
-        db.find().sort({createDate: -1}).exec((err, docs) => {
-            callback(err,docs)
+    getAll: () => {
+        return new Promise((resolve, reject) => {
+            db.find().sort({createDate: -1}).exec((err, docs) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(docs)
+                }
+
+            })
         })
     }
 }

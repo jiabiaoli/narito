@@ -3,7 +3,6 @@
 const electron = require('electron')
 const clipboard = electron.clipboard
 module.exports = function (opts) {
-    console.log('start.....')
     opts = opts || {}
     const watchDelay = opts.watchDelay || 1000
 
@@ -14,7 +13,6 @@ module.exports = function (opts) {
 
     return {
         start: () => {
-            console.log("启动定时器")
             intervalId = setInterval(() => {
                 const text = clipboard.readText()
                 const image = clipboard.readImage()
@@ -29,7 +27,6 @@ module.exports = function (opts) {
             }, watchDelay)
         },
         stop: () => {
-            console.log("停止定时器")
             clearInterval(intervalId)
         }
     }

@@ -3,7 +3,6 @@ import Record from '@/common/entity/Record'
 import recordService from '@/common/service/RecordService'
 
 const {ipcMain} = require('electron')
-import OptionService from "@/common/service/OptionService";
 
 const watcher = clipboardWatcher({
     watchDelay: 1000,
@@ -16,12 +15,6 @@ const watcher = clipboardWatcher({
         recordService.insert(record);
     }
 });
-OptionService.get().then(option => {
-    console.log("首选项:",option)
-    if (option.active) {
-        watcher.start()
-    }
-})
 
 ipcMain.on('watcher-stop', (event, arg) => {
     watcher.stop()
@@ -32,10 +25,12 @@ ipcMain.on('watcher-start', (event, arg) => {
 
 
 export default {
-    start(){
+    start(callback) {
         watcher.start()
+        callback && callback()
     },
-    stop(){
+    stop(callback) {
         watcher.stop()
+        callback && callback()
     }
 }

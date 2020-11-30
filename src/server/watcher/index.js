@@ -1,6 +1,6 @@
-import clipboardWatcher from './watcher'
-import Record from '../entity/Record'
-import recordService from '../service/RecordService'
+import clipboardWatcher from '@/common/watcher/watcher'
+import Record from '@/common/entity/Record'
+import recordService from '@/common/service/RecordService'
 
 const {ipcMain} = require('electron')
 import OptionService from "@/common/service/OptionService";
@@ -24,9 +24,18 @@ OptionService.get().then(option => {
 })
 
 ipcMain.on('watcher-stop', (event, arg) => {
-    console.log("接收到:停止消息")
     watcher.stop()
 })
 ipcMain.on('watcher-start', (event, arg) => {
     watcher.start()
 })
+
+
+export default {
+    start(){
+        watcher.start()
+    },
+    stop(){
+        watcher.stop()
+    }
+}

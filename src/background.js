@@ -5,7 +5,7 @@ import {createProtocol} from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, {VUEJS_DEVTOOLS} from 'electron-devtools-installer'
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
-import './common/watcher/server'
+import './server/Tray'
 import db from './common/nedb/index'
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([

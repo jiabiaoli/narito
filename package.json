@@ -1,11 +1,9 @@
 {
   "name": "narito",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "author": "podigua",
+  "description": "copy",
   "private": true,
-  "build": {
-    "productName": "narito",
-    "appId": "com.podigua"
-  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -17,6 +15,7 @@
   },
   "main": "background.js",
   "dependencies": {
+    "copy-webpack-plugin": "^6.3.2",
     "core-js": "^3.6.5",
     "electron-store": "^6.0.1",
     "element-ui": "^2.3.6",

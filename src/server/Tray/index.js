@@ -1,14 +1,14 @@
-const {app, Tray, Menu, dialog} = require('electron')
+const {app, Tray, Menu,nativeImage} = require('electron')
 import watcher from "@/server/watcher";
 import OptionService from "@/common/service/OptionService";
-
-
+import main from '@/server/Window/main'
 const path = require('path')
+const fs = require('fs')
 import '@/server/watcher/index'
 
-let tray_active = path.join(__dirname, 'assets/tray-active.png')
-let tray_frozen = path.join(__dirname, 'assets/tray-frozen.png')
-let tray = null;
+let tray_active =nativeImage.createFromPath(path.join(__static, 'static/tray-active.png'))
+let tray_frozen = nativeImage.createFromPath(path.join(__static, 'static/tray-frozen.png'))
+let tray = null
 app.whenReady().then(() => {
     function active(item, menu) {
         if (item.checked === false) {
@@ -38,8 +38,11 @@ app.whenReady().then(() => {
 
     OptionService.get().then(option => {
         let menu = Menu.buildFromTemplate([
-            {label: 'Item1', type: 'radio'},
-            {label: 'Item2', type: 'radio'},
+            {
+                label: '主窗口', click: () => {
+                    main.show()
+                }
+            },
             {
                 id: 'record-active',
                 label: '记录中', type: 'checkbox', checked: true, click: (item, window, event) => {
@@ -54,17 +57,7 @@ app.whenReady().then(() => {
             },
             {
                 label: '退出', click: () => {
-                    dialog.showMessageBox({
-                        type: "none",
-                        buttons: ["取消", "确认"],
-                        defaultId: 0,
-                        title: "信息提示",
-                        message: "是否确认退出程序？"
-                    }, (index) => {
-                        if (index == 1) {
-                            app.quit()
-                        }
-                    })
+                    app.quit()
                 }
             }
         ]);
@@ -81,5 +74,7 @@ app.whenReady().then(() => {
         tray.setContextMenu(menu)
     })
 })
+
+
 
 

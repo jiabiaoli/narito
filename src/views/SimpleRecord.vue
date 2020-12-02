@@ -1,5 +1,6 @@
 <template>
   <div>
+    <el-input  @click="mousetrap"></el-input>
     <el-tabs>
       <el-tab-pane label="全部">
         <div style="overflow:auto;height: 300px;">
@@ -15,7 +16,7 @@
 
 <script>
 const {ipcRenderer} = require('electron')
-
+const Mousetrap = require('mousetrap');
 export default {
   name: "SimpleRecord",
   data() {
@@ -53,7 +54,22 @@ export default {
     },
     reset() {
 
+    },
+    mousetrap(){
+      Mousetrap.bind("",()=>{})
+      Mousetrap.record(function(sequence) {
+        // sequence is an array like ['ctrl+k', 'c']
+        console.log('You pressed: ' + sequence.join(' '));
+      });
     }
+  },created() {
+    // window.addEventListener('keydown',(e,k)=>{
+    //   console.log("down",e)
+    // },true)
+    //
+    // window.addEventListener('keyup',(e,k)=>{
+    //   console.log("up",e)
+    // },true)
   }
 }
 </script>

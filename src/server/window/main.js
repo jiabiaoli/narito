@@ -1,7 +1,7 @@
-import {app, protocol, BrowserWindow, ipcMain} from 'electron'
-import global from "@/common/global";
+import {app, protocol, BrowserWindow} from 'electron'
 import {createProtocol} from "vue-cli-plugin-electron-builder/lib";
 import installExtension, {VUEJS_DEVTOOLS} from "electron-devtools-installer";
+
 app.dock.hide()
 const isDevelopment = process.env.NODE_ENV !== 'production'
 protocol.registerSchemesAsPrivileged([
@@ -51,10 +51,6 @@ async function createWindow() {
         await global.mainWindow.loadURL('app://./index.html')
     }
     global.mainWindow.show()
-    global.mainWindow.on('close', (event) => {
-        global.mainWindow.hide()
-        event.returnValue = false
-    })
 }
 
 app.whenReady().then(() => {
@@ -77,7 +73,11 @@ if (isDevelopment) {
 }
 
 function show() {
-    if (BrowserWindow.getAllWindows().length === 0) createWindow()
+    if (global.mainWindow.isDestroyed()) {
+        createWindow();
+    } else {
+        global.mainWindow.show()
+    }
 }
 
 export default {

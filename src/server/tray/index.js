@@ -1,13 +1,13 @@
-const {app, Tray, Menu,nativeImage} = require('electron')
+const {app, Tray, Menu, nativeImage} = require('electron')
 import watcher from "@/server/watcher";
 import OptionService from "@/common/service/OptionService";
-import main from '@/server/Window/main'
+import main from '@/server/window/main'
+
 const path = require('path')
-const fs = require('fs')
 import '@/server/watcher/index'
 
-let tray_active =nativeImage.createFromPath(path.join(__static, 'static/tray-active.png'))
-let tray_frozen = nativeImage.createFromPath(path.join(__static, 'static/tray-frozen.png'))
+let tray_active = path.join(__static, 'static/tray-active.png')
+let tray_frozen = path.join(__static, 'static/tray-frozen.png')
 let tray = null
 app.whenReady().then(() => {
     function active(item, menu) {

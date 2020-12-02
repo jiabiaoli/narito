@@ -6,7 +6,7 @@ const RecordType = {
 }
 
 export default class Record {
-    constructor(type, content) {
+    constructor(type, content, width, height) {
         this.type = type;
         this.content = content;
         this.createDate = new Date();
@@ -27,8 +27,8 @@ export default class Record {
      * @param content
      * @returns {Record}
      */
-    static createImage(content) {
-        return new Record(RecordType.image, content);
+    static createImage(content, size) {
+        return new Record(RecordType.image, content, size.width, size.height);
     }
 }
 

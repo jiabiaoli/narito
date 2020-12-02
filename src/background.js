@@ -1,7 +1,11 @@
 'use strict'
 import path from 'path'
-import main from '@/server/Window/main'
-import tray from '@/server/Tray/index'
+import '@/server/window/main'
+import '@/server/tray/index'
+import '@/server/notice'
 
-global.__static=path.resolve(__dirname,"")
-
+global.__static = path.resolve(__dirname, "")
+global.mainWindow = null
+global.simpleWindow = null
+global.optionWindow = null
+global.records = [];
